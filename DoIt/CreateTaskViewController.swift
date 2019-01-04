@@ -24,9 +24,11 @@ class CreateTaskViewController: UIViewController {
     @IBAction func addTapped(_ sender: Any) {
         // Create a task form this page and the add to the list.
         
-        let task = Task()
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let task = Task(context: context)
         task.name = taskNameTextField.text!
-        task.important = importantSwitch.isOn
+        task.important = importantSwitch.isOn as NSObject
         
         previousVC.tasks.append(task)
         previousVC.tableView.reloadData()
